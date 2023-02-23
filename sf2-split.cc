@@ -76,11 +76,12 @@ int main(int argc, char* argv[])
           const sfPresetHeader_t& presetHeader = hydra.getPresetHeader(presIter);
           std::string presetName;
           sf2NameToStr(presetName, presetHeader.achPresetName);
-          std::replace(presetName.begin(), presetName.end(), ' ', '_');
-          sprintf(wrFileName, "%03d-%03d-%s.sf2",
+          int number = bankIter->first == 128 ? bankIter->first : presIter->first;
+          //std::replace(presetName.begin(), presetName.end(), ' ', '_');
+          sprintf(wrFileName, "{%03d} %s.sf2",
                   //origFilename.c_str(),
-                  bankIter->first,
-                  presIter->first,
+                  //bankIter->first,
+                  number,
                   presetName.c_str());
           // Do write to file
           int fdWrite = open(wrFileName,

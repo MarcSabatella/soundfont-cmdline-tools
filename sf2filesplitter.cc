@@ -302,6 +302,10 @@ std::size_t SF2FileSplitter::getLenOrWriteData(char* data, std::size_t maxLen)
       // copy and align pbag zone pointer
       dataPHDR[headerCount] = presetHeader;
       dataPHDR[headerCount].wPresetBagNdx = *bagIdxIter;
+      if(dataPHDR[headerCount].wBank != 128) {
+        dataPHDR[headerCount].wBank = 0;
+      }
+      dataPHDR[headerCount].wPreset = 0;
     }
     // PHDR terminal sample
     sfPresetHeader_t &destTerminalPHDREntry = dataPHDR[lenPHDR-1];
